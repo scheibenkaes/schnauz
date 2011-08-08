@@ -15,3 +15,15 @@
        9 (value (card :hearts 9))
        8 (value (card :hearts 8))
        7 (value (card :hearts 7))))
+
+(deftest test-deck-consists-of-cards 
+  (is (set? deck))
+  (is (every? map? deck)))
+
+(deftest test-sum-hand 
+  (are [exp sum] (= exp sum)
+       31 (sum-hand [(card :hearts :ace) (card :hearts 10) (card :hearts :jack)])
+       30.5 (sum-hand [(card :hearts 7)(card :spades 7)(card :diamonds 7)])
+       27 (sum-hand [(card :hearts 7) (card :hearts 10) (card :hearts :jack)])
+       17 (sum-hand [(card :hearts 7) (card :hearts 10) (card :diamonds 9)])
+       9 (sum-hand [(card :hearts 7) (card :spades 8) (card :diamonds 9)])))

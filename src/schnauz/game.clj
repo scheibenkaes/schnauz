@@ -19,7 +19,14 @@
       (contains? #{:jack :queen :king} sym) 10
       (= sym :ace) 11)))
 
-(def deck 
-  (cartesian-product colors symbols))
+(defn sum-hand [cards] 
+  "Add the values of the given hand."
+  (let [groups (group-by :color cards)
+        all-same-symbols? (apply = (map :symbol cards))]
+    (if all-same-symbols?
+      30.5
+      (->> (vals groups) (map #(map value %)) (map #(apply + %)) (apply max)))))
 
+(def deck 
+  (->> (cartesian-product colors symbols) (map (fn [[c s]] (card c s))) set))
 
