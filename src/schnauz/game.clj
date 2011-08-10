@@ -44,5 +44,6 @@
   "Create the inital data for a game.
   Keys:
     :players - list of players
-    :lives-left - map of players to lives"
+    :lives-left - map of players to lives
+    :hands - players to cards map"
   {:players players :lives-left (into {} (for [p players] [p 3])) :hands (deal-cards players (shuffle deck))})

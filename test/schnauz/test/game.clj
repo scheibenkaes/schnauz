@@ -32,6 +32,7 @@
         cnt? #(not= nil (% game))]
     (is (cnt? :players))
     (is (= {:player1 3 :player2 3} (:lives-left game)))
+    (is (= 2 (count (:hands game))))
     (is (cnt? :lives-left))))
 
 (deftest test-deal-cards 
