@@ -31,7 +31,7 @@
   (let [game (init [:player1 :player2])
         cnt? #(not= nil (% game))]
     (is (cnt? :players))
-    (is (= :p1 (:player-at-turn game)))
+    (is (= :player1 (:player-at-turn game)))
     (is (= {:player1 3 :player2 3} (:lives-left game)))
     (is (= 2 (count (:hands game))))
     (is (cnt? :lives-left))))
@@ -43,3 +43,9 @@
         rest-of-deck (drop 6 deck)]
     (is (= rest-of-deck (:not-dealt-cards result)))
     (is (= exp (:players-cards result)))))
+
+(deftest test-next-player 
+  (is (= :p1 (next-player [:p1 :p2] :p2))))
+
+(deftest test-update-player-at-turn 
+  (is (= :p2 (-> (update-player-at-turn {:player-at-turn :p1 :players [:p1 :p2]}) :player-at-turn))))
