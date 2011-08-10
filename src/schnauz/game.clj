@@ -45,5 +45,6 @@
   Keys:
     :players - list of players
     :lives-left - map of players to lives
+    :player-at-turn - the player who's turn it is.
     :hands - players to cards map"
   {:players players :lives-left (into {} (for [p players] [p 3])) :hands (deal-cards players (shuffle deck))})

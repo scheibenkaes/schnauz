@@ -31,6 +31,7 @@
   (let [game (init [:player1 :player2])
         cnt? #(not= nil (% game))]
     (is (cnt? :players))
+    (is (= :p1 (:player-at-turn game)))
     (is (= {:player1 3 :player2 3} (:lives-left game)))
     (is (= 2 (count (:hands game))))
     (is (cnt? :lives-left))))
