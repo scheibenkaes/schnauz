@@ -17,7 +17,6 @@
        7 (value (card :hearts 7))))
 
 (deftest test-deck-consists-of-cards 
-  (is (set? deck))
   (is (every? map? deck)))
 
 (deftest test-sum-hand 
@@ -34,3 +33,11 @@
     (is (cnt? :players))
     (is (= {:player1 3 :player2 3} (:lives-left game)))
     (is (cnt? :lives-left))))
+
+(deftest test-deal-cards 
+  (let [exp {:p1 [(nth deck 0)(nth deck 1)(nth deck 2)]
+             :p2 [(nth deck 3)(nth deck 4)(nth deck 5)]}
+        result (deal-cards [:p1 :p2] deck)
+        rest-of-deck (drop 6 deck)]
+    (is (= rest-of-deck (:not-dealt-cards result)))
+    (is (= exp (:players-cards result)))))

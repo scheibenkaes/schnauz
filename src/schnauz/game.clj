@@ -28,11 +28,21 @@
       (->> (vals groups) (map #(map value %)) (map #(apply + %)) (apply max)))))
 
 (def deck 
-  (->> (cartesian-product colors symbols) (map (fn [[c s]] (card c s))) set))
+  (->> (cartesian-product colors symbols) (map (fn [[c s]] (card c s)))))
+
+(defn deal-cards [players cards] 
+  "Deal the cards to players. Returns a map of the following keys:
+  :not-dealt-cards - the cards that were not dealt to the players.
+  :players-cards - a map players to three cards in a vector."
+  (let [part (partition 3 cards)]
+    {
+     :players-cards (apply hash-map (interleave players part))
+     :not-dealt-cards (drop (* 3 (count players)) cards)
+     }))
 
 (defn init [players] 
   "Create the inital data for a game.
   Keys:
     :players - list of players
     :lives-left - map of players to lives"
-  {:players players :lives-left (into {} (for [p players] [p 3]))})
+  {:players players :lives-left (into {} (for [p players] [p 3])) :hands (deal-cards players (shuffle deck))})
