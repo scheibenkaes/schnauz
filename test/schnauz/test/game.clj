@@ -27,3 +27,10 @@
        27 (sum-hand [(card :hearts 7) (card :hearts 10) (card :hearts :jack)])
        17 (sum-hand [(card :hearts 7) (card :hearts 10) (card :diamonds 9)])
        9 (sum-hand [(card :hearts 7) (card :spades 8) (card :diamonds 9)])))
+
+(deftest test-init 
+  (let [game (init [:player1 :player2])
+        cnt? #(not= nil (% game))]
+    (is (cnt? :players))
+    (is (= {:player1 3 :player2 3} (:lives-left game)))
+    (is (cnt? :lives-left))))

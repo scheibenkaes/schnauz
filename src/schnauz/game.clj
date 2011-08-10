@@ -30,3 +30,9 @@
 (def deck 
   (->> (cartesian-product colors symbols) (map (fn [[c s]] (card c s))) set))
 
+(defn init [players] 
+  "Create the inital data for a game.
+  Keys:
+    :players - list of players
+    :lives-left - map of players to lives"
+  {:players players :lives-left (into {} (for [p players] [p 3]))})
