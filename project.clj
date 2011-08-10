@@ -1,4 +1,4 @@
-(defproject schnauz "1.0.0-SNAPSHOT"
+(defproject org.scheibenkaes/schnauz "1.0.0-SNAPSHOT"
   :description "FIXME: write description"
   :dev-dependencies [[org.clojars.autre/lein-vimclojure "1.0.0"]
                      [lein-vim "1.0.1-SNAPSHOT"]]
